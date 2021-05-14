@@ -1,0 +1,7 @@
+#!/bin/bash
+module load parallel
+export LD_LIBRARY_PATH=/global/cscratch1/sd/alexpo7/media/sf_das_compression/include/hdf5/lib
+export HDF5_USE_FILE_LOCKING=FALSE
+DIRECTORY="/global/project/projectdirs/m1248/alex/media/sf_das_compression/data/test_acoustic/*.h5"
+#printf "file_name,cmp_ratio,abs_mean_uncmp,std_dev,min_uncmp,max_uncmp,mean_uncmp,cmp_time,read_time,write_time,tot_time,\n" | tee -a ../logs/output_log_fastpfor_test.csv
+ls $DIRECTORY | parallel -j10 ./DAS_Compress -i {} -o /global/cscratch1/sd/alexpo7/media/sf_das_compression/data/output/ -d Acoustic -g | tee -a ../logs/output_log_fastpfor_test.csv

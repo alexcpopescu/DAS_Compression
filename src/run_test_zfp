@@ -1,0 +1,10 @@
+#!/bin/bash
+export LD_LIBRARY_PATH=/global/cscratch1/sd/alexpo7/media/sf_das_compression/include/hdf5/lib
+module load parallel
+DIRECTORY="/global/project/projectdirs/m1248/alex/media/sf_das_compression/data/test/*"
+printf "file_name,rate,prec,cmp_ratio,rmse,abs_mean_uncmp,min_uncmp,max_uncmp,mean_uncmp,min_decmp,max_decmp,mean_dcmp,cmp_time,decmp_time,\n" | tee -a ../logs/output_log_zfp_test.csv
+for rate in `seq 8 1 16`
+do
+    printf "\nTesting rate $rate\n"
+    ls $DIRECTORY | parallel ./DAS_Compression_ZFP {} /global/cscratch1/sd/alexpo7/media/sf_das_compression/data/ -r $rate -d | tee -a ../logs/output_log_zfp_test.csv
+done

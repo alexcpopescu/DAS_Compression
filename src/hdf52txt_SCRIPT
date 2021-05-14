@@ -1,0 +1,5 @@
+#!/bin/bash
+export LD_LIBRARY_PATH=/global/cscratch1/sd/alexpo7/media/sf_das_compression/include/hdf5/lib
+export HDF5_USE_FILE_LOCKING=FALSE
+
+./hdf52txt -i $1 -d /DataCT | tee -a ../data/sample_data.txt

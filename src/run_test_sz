@@ -1,0 +1,9 @@
+#!/bin/bash
+module load parallel
+export LD_LIBRARY_PATH=/global/cscratch1/sd/alexpo7/media/sf_das_compression/include/hdf5/lib:/global/cscratch1/sd/alexpo7/media/sf_das_compression/include/sz/lib
+DIRECTORY="/global/project/projectdirs/m1248/alex/media/sf_das_compression/data/test/*"
+printf "file_name,err_mode,err_bound,best_cmp,best_speed,cmp_ratio,rmse,abs_mean_uncmp,min_uncmp,max_uncmp,mean_uncmp,min_decmp,max_decmp,mean_dcmp,cmp_time,decmp_time,\n" | tee -a ../logs/output_log_sz_test.csv
+for relBoundRatio in 0.0001 0.0005 0.001 0.0015 0.002 0.0025 0.003
+do
+	ls $DIRECTORY | parallel ./DAS_Compression_SZ {} /global/cscratch1/sd/alexpo7/media/sf_das_compression/data/output/ REL $relBoundRatio -c -d | tee -a ../logs/output_log_sz_test.csv
+done

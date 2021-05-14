@@ -1,0 +1,5 @@
+#!/bin/bash
+module load cray-hdf5-parallel
+FILE_PATH="/global/project/projectdirs/m1248/alex/media/sf_das_compression/data/input/westSac_180103000031_ch4650_4850.h5"
+DATA_DIRECTORY="/global/project/projectdirs/m1248/alex/media/sf_das_compression/data/"
+./DAS_Compression_IDEALEM $FILE_PATH $DATA_DIRECTORY

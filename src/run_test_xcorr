@@ -1,0 +1,20 @@
+#!/bin/bash
+export LD_LIBRARY_PATH=/global/cscratch1/sd/alexpo7/media/sf_das_compression/include/hdf5/lib:/global/cscratch1/sd/alexpo7/media/sf_das_compression/include/sz/lib
+for file in ../data/input/*
+do
+    printf "\nRunning xcorrelation on $file\n"
+    output="${file##*/}"
+    output="${output%.*}"
+    output="${output%.*}"
+    srun -n 3 ../../../../../../project/projectdirs/m1248/dassa/./xcorrelation -i $file -o ../data/output/xcorr/"$output.tdms_xcorr.h5" -t /DataCT
+    printf "\nExporting xcorr file to /output/xcorr/$output.tdms_xcorr.h5"
+done
+for file in ../data/output/decompressed/*
+do
+    printf "\nRunning xcorrelation on $file\n"
+    output="${file##*/}"
+    output="${output%.*}"
+    output="${output%.*}"
+    srun -n 3 ../../../../../../project/projectdirs/m1248/dassa/./xcorrelation -i $file -o ../data/output/xcorr/"$output.tdms_xcorr.h5" -t /DataCT
+    printf "\nExporting xcorr file to /xcorr/$output.tdms_xcorr.h5"
+done

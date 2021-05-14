@@ -1,0 +1,5 @@
+#!/bin/bash
+export LD_LIBRARY_PATH=/global/cscratch1/sd/alexpo7/media/sf_das_compression/include/hdf5/lib
+printf "\nCalculating RMSE for xcorrelation results...\n"
+printf "file_name,rate,prec,rmse,abs_mean_uncmp,min_uncmp,max_uncmp,mean_uncmp,min_decmp,max_decmp,mean_dcmp,\n" | tee -a ../logs/output_log_zfp_xcorr.csv
+./xcorr_test /global/cscratch1/sd/alexpo7/media/sf_das_compression/data/output/xcorr/ -d | tee -a ../logs/output_log_zfp_xcorr.csv
