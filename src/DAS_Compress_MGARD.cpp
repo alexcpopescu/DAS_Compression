@@ -586,7 +586,6 @@ int compress(std::string file_path, std::string comp_file_path,
     std::cout << "Write Time: " << (write_end_time - write_start_time) << "ms\n\n";
 
     // calculate compression ratio
-    //int nx_comp_output = get_input_dim(comp_file_path, DATASET_NAME, 0);
     double comp_ratio = ((double) (nx_uncomp_input * ny_uncomp_input * sizeof(int16_t))) 
                         / ((double) (compressed.size()));
 

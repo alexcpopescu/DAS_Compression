@@ -16,16 +16,16 @@ ZFP_FLAG=-I$(ZFP_DIR)/include -L$(ZFP_DIR)/build/lib64 -lzfp
 SZ_FLAG=-I$(SZ_DIR)/include/sz -L$(SZ_DIR)/lib64 -lSZ -lzstd -lm
 OPENMP_FLAG=-fopenmp
 
-all: DAS_Compression_IDEALEM DAS_Compression_FastPFOR DAS_Decompress DAS_Compress_MGARD DAS_Compression_ZFP DAS_Compression_SZ xcorr_test_sz hdf52txt
+all: DAS_Compression_IDEALEM DAS_Compression_FastPFOR DAS_Compress_MGARD DAS_Compression_ZFP DAS_Compression_SZ xcorr_test_sz hdf52txt
 
 DAS_Compression_IDEALEM: DAS_Compression_IDEALEM.cpp
 	$(CC) -o DAS_Compression_IDEALEM DAS_Compression_IDEALEM.cpp $(HDF5_FLAG) $(Other_FLAG) $(IDEALEM_FLAG)
 DAS_Compression_FastPFOR: DAS_Compression_FastPFOR.cpp
 	$(CC) -o DAS_Compression_FastPFOR DAS_Compression_FastPFOR.cpp $(HDF5_FLAG) $(FASTPFOR_FLAG) $(Other_FLAG) #$(FASTPFOR_DIR)/lib64/libFastPFOR.a
-DAS_Compress: DAS_Compress.cpp
-	$(CC) -o DAS_Compress DAS_Compress.cpp $(HDF5_FLAG) $(FASTPFOR_FLAG) $(Other_FLAG)
-DAS_Decompress: DAS_Decompress.cpp
-	$(CC) -o DAS_Decompress DAS_Decompress.cpp $(HDF5_FLAG) $(FASTPFOR_FLAG) $(Other_FLAG)
+DAS_Compress_FastPFOR: DAS_Compress_FastPFOR.cpp
+	$(CC) -o DAS_Compress_FastPFOR DAS_Compress_FastPFOR.cpp $(HDF5_FLAG) $(FASTPFOR_FLAG) $(Other_FLAG)
+DAS_Decompress_FastPFOR: DAS_Decompress_FastPFOR.cpp
+	$(CC) -o DAS_Decompress_FastPFOR DAS_Decompress_FastPFOR.cpp $(HDF5_FLAG) $(FASTPFOR_FLAG) $(Other_FLAG)
 DAS_Compress_MGARD: DAS_Compress_MGARD.cpp
 	$(CC) -o DAS_Compress_MGARD DAS_Compress_MGARD.cpp $(HDF5_FLAG) $(MGARD_FLAG) $(OPENMP_FLAG) $(Other_FLAG)
 DAS_Compression_ZFP: DAS_Compression_ZFP.cpp
@@ -43,9 +43,9 @@ clean:
 	rm -f *.h5 *.o \
 		DAS_Compression_FastPFOR
 	rm -f *.h5 *.o \
-		DAS_Compress
+		DAS_Compress_FastPFOR
 	rm -f *.h5 *.o \
-		DAS_Decompress
+		DAS_Decompress_FastPFOR
 	rm -f *.h5 *.o \
 		hdf52txt
 	rm -f *.h5 *.o \

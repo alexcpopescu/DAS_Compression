@@ -700,7 +700,7 @@ ARGUMENTS:
 
 int main(int argc, char *argv[])
 {
-    // ensure arguments have been called correctly
+    // ensurearguments have been called correctly
     std::string DATA_QUERY;
     if (argc < 6)
     {
